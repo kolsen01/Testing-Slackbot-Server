@@ -6,56 +6,11 @@ from slackclient import SlackClient
 
 # Your app's Slack bot user token
 SLACK_BOT_TOKEN = "xoxb-266477967974-sQp2XpVg8T3jf2fssDIhsD82"
-# SLACK_VERIFICATION_TOKEN = "SLACK_VERIFICATION_TOKEN"
-
-# Slack client for Web API requests
-#slack_client = SlackClient(SLACK_BOT_TOKEN)
 
 # Flask webserver for incoming traffic from Slack
 app = Flask(__name__)
 
 # Post a message to a channel, asking users if they want to play a game
-
-"""attachments_json = [
-    {
-        "fallback": "Upgrade your Slack client to use messages like these.",
-        "color": "#3AA3E3",
-        "attachment_type": "default",
-        "callback_id": "menu_options_2319",
-        "actions": [
-            {
-                "name": "games_list",
-                "text": "Pick a game...",
-                "type": "select",
-                "data_source": "external"
-            }
-        ]
-    }
-]
-"""
-#
-#@app.route("/slack/message_options", methods=["POST"])
-#def message_options():
-#    print(request.form, "message_options")
-#    # Parse the request payload
-#    form_json = json.loads(request.form["payload"])
-
-#    menu_options = {
-"""
-        "options": [
-            {
-                "text": "Chess",
-                "value": "chess"
-            },
-            {
-                "text": "Global Thermonuclear War",
-                "value": "war"
-            }
-        ]
-    }
-
-    return Response(json.dumps(menu_options), mimetype='application/json')
-"""
 
 @app.route("/slack/message_actions", methods=["POST"])
 def message_actions():
@@ -72,15 +27,6 @@ def message_actions():
     else:
         message_text = ":horse:"
 
-"""
-    response = slack_client.api_call(
-      "chat.update",
-      channel=form_json["channel"]["id"],
-      ts=form_json["message_ts"],
-      text=message_text,
-      attachments=[]
-    )
-"""
     return Response(json.dumps(message_text), mimetype='application/json')
 
 #test
@@ -127,7 +73,7 @@ def command():
             ]
         }
 
-   # return make_response(message, 200) 
+    # return make_response(message, 200) 
     return Response(json.dumps(message), mimetype='application/json')   
 
 if __name__ == "__main__":
